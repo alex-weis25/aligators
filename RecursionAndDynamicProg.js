@@ -23,16 +23,19 @@ space: O(n) ... can include recursive call for each letter ... i.e. = ['icu'] =>
 const s = 'bettercodebetter';
 const dict = ['bet', 'better', 'code'];
 
-const wordBreak = (s, dict) => {
+const wordBreak = (s, dict, dictSet = undefined) => {
+  if (!dictSet) {
+    dictSet = new Set(dict);
+  }
   // base case
   if (!s.length) return true;
-
   let curWord = '';
   for (let i = 0; i < s.length; i++) {
     let curLetter = s[i];
+
     curWord += curLetter;
-    if (dict.includes(curWord)) {
-      let found = wordBreak(s.slice(i + 1), dict);
+    if (dictSet.has(curWord)) {
+      let found = wordBreak(s.slice(i + 1), dict, dictSet);
       if (found) return true;
     }
   }
@@ -159,13 +162,13 @@ const x = 3;
 const prisonersCircle = (n, x) => {
   let prisoners = [];
   let order = [];
-  for (let i = 1; i <= n; i++){
+  for (let i = 1; i <= n; i++) {
     prisoners.push(i);
   }
 
   let idx = 0;
 
-  while (prisoners.length > 1){
+  while (prisoners.length > 1) {
     idx += x - 1;
     let next = idx % prisoners.length;
 
@@ -178,7 +181,7 @@ const prisonersCircle = (n, x) => {
   return finalOrder;
 };
 
-console.log('answer to prisoners: ', prisonersCircle(n, x));
+console.log('prisonersCircle answer: ', prisonersCircle(n, x));
 
 
 /* Number of candies - HackerRank */
@@ -222,4 +225,91 @@ const candies = (ratings) => {
 
 };
 
-console.log('Answer to candies', candies(ratings));
+console.log('candies answer: ', candies(ratings));
+
+
+/* Promise bracelets */
+
+/* Question
+You are selling promise bracelts to a group of customers. Each customer has a max
+price they are willing to pay. You can only sell to each customer the same or more
+than you charged your last customer. Given an input array disignating the amount you
+can charge each customer, return an array representing value you receive from each
+customer and the total profit.
+
+ex: customers = [40,100,50,60,70,90,90,90,70]
+answer = [[40,50,50,60,70,70,70,70,70], 500]
+
+prices[0] = 40
+100 > 40 prices[1] = 100
+50 < 100... 100 - 50 <= 50 prices[2] = 50
+60 > 50...prices[3] = 60
+70 > 60 prices[4] = 70
+90 > 70...90-70 < prices[5] = 90
+90 = 90 prices[6] = 90
+90 = 90 prices[7] = 90
+70 < 90 ...90 - 70 < 70, prices[8] = 70
+[40,100,50,60,70,90,90,90,70]
+
+start at end and kept track of money left on table until it becomes 0 again
+p[8] = 70
+p[7]...90 - 70 = 20, 70 > 20. p[7] = 70
+p[6]...90 - 70 + 20 = 40; 70 > 40 p[6] = 70
+p[5]...90 - 70 + 40 = 60; 70 > 60 p[5] = 70
+p[4]...70 = 70, totalDif = 0, p[4] = 70
+p[3]...60 < 70 p[3] = 60
+p[2]...50 < 60 p[2] = 50
+p[1]...50 = 50 p[1] = 50
+p[0]...40 < 50 p[0] = 40
+[40,50,50,60,70,70,70,70]
+
+
+*/
+
+const customers = [40, 100, 50, 60, 10, 90, 90, 90, 70];
+
+const promiseBracelets = customers => {
+  let prices = new Array(customers.length).fill(0);
+  prices[0] = customers[0];
+  let total = 0;
+
+  for (let i = 1; i < customers.length; i++) {
+    if (customers[i] >= prices[i - 1]) {
+      prices[i] = customers[i];
+    } else if (prices[i - 1] - customers[i] > customers[i]) {
+      prices[i] = prices[i - 1];
+    } else {
+      prices[i] = customers[i];
+    }
+  }
+
+  let curDeficit = 0;
+  for (let i = prices.length - 2; i >= 0; i--) {
+    if (prices[i] > prices[i + 1]) {
+      curDeficit += prices[i] - prices[i + 1];
+      if (curDeficit <= prices[i + 1]) {
+        prices[i] = prices[i + 1];
+      } else {
+        prices[i + 1] = prices[i];
+      }
+    } else if (prices[i] <= prices[i + 1]) {
+      curDeficit = 0;
+    }
+  }
+
+  for (let i = 0; i < prices.length - 1; i++) {
+    if (prices[i] > prices[i + 1]) {
+      prices[i + 1] = prices[i];
+    }
+  }
+
+  prices.forEach((val, i) => {
+    let profit;
+    if(customers[i] >= val){
+      total += val
+    }
+  })
+  return [total, prices]
+};
+
+console.log('promiseBraclets answer: ', promiseBracelets(customers));
