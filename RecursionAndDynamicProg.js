@@ -15,8 +15,8 @@ return true => 'better code better'
 n = string length
 d = dictionary length
 
-time: best case: O(n^2 * d) (loop * slice) worstcase: ...
-space: O(n) ... can include recursive call for each letter ... i.e. = ['icu'] => ' i c u'
+time: best case: O(n^2) since set look ups are O(1) (loop * slice) worstcase: ...
+space: O(n)
 
 */
 
