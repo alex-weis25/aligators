@@ -130,7 +130,7 @@ console.log('fibonacci answer: ', fib(10));
 /* Prisoners of War */
 
 /* Question
-A bunch of POWs have been captured. The Capturing army executes every 5 prisoners.
+A bunch of POWs have been captured. The Capturing army executes every prisoner.
 Given n prisoners and x prisoners skipped, return the order they will be executed.
 
 ex: n = 5, x = 2
@@ -187,9 +187,16 @@ console.log('prisonersCircle answer: ', prisonersCircle(n, x));
 /* Number of candies - HackerRank */
 
 /* Question
-Alice is a kindergarten teacher. She wants to give some candies to the children in her class.  All the children sit in a line and each of them has a rating score according to his or her performance in the class.  Alice wants to give at least 1 candy to each child. If two children sit next to each other, then the one with the higher rating must get more candies. Alice wants to minimize the total number of candies she must buy.
+Alice is a kindergarten teacher. She wants to give some candies to the children
+in her class.  All the children sit in a line and each of them has a rating score
+according to his or her performance in the class.  Alice wants to give at least
+1 candy to each child. If two children sit next to each other, then the one with
+the higher rating must get more candies. Alice wants to minimize the total number
+of candies she must buy.
 
-For example, assume her students' ratings are [4, 6, 4, 5, 6, 2]. She gives the students candy in the following minimal amounts: [1, 2, 1, 2, 3, 1]. She must buy a minimum of 10 candies.
+For example, assume her students' ratings are [4, 6, 4, 5, 6, 2]. She gives the
+students candy in the following minimal amounts: [1, 2, 1, 2, 3, 1]. She must buy
+a minimum of 10 candies.
 
 */
 
@@ -233,37 +240,12 @@ console.log('candies answer: ', candies(ratings));
 /* Question
 You are selling promise bracelts to a group of customers. Each customer has a max
 price they are willing to pay. You can only sell to each customer the same or more
-than you charged your last customer. Given an input array disignating the amount you
-can charge each customer, return an array representing value you receive from each
+than you charged your last customer. Given an input array designating the amount you
+can charge each customer, return an array representing price you charge each
 customer and the total profit.
 
 ex: customers = [40,100,50,60,70,90,90,90,70]
 answer = [[40,50,50,60,70,70,70,70,70], 500]
-
-prices[0] = 40
-100 > 40 prices[1] = 100
-50 < 100... 100 - 50 <= 50 prices[2] = 50
-60 > 50...prices[3] = 60
-70 > 60 prices[4] = 70
-90 > 70...90-70 < prices[5] = 90
-90 = 90 prices[6] = 90
-90 = 90 prices[7] = 90
-70 < 90 ...90 - 70 < 70, prices[8] = 70
-[40,100,50,60,70,90,90,90,70]
-
-start at end and kept track of money left on table until it becomes 0 again
-p[8] = 70
-p[7]...90 - 70 = 20, 70 > 20. p[7] = 70
-p[6]...90 - 70 + 20 = 40; 70 > 40 p[6] = 70
-p[5]...90 - 70 + 40 = 60; 70 > 60 p[5] = 70
-p[4]...70 = 70, totalDif = 0, p[4] = 70
-p[3]...60 < 70 p[3] = 60
-p[2]...50 < 60 p[2] = 50
-p[1]...50 = 50 p[1] = 50
-p[0]...40 < 50 p[0] = 40
-[40,50,50,60,70,70,70,70]
-
-
 */
 
 const customers = [40, 100, 50, 60, 10, 90, 90, 90, 70];
