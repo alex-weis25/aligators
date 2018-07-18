@@ -124,3 +124,102 @@ const fib = (n, memo = {}) => {
 
 console.log('fibonacci answer: ', fib(10));
 
+/* Prisoners of War */
+
+/* Question
+A bunch of POWs have been captured. The Capturing army executes every 5 prisoners.
+Given n prisoners and x prisoners skipped, return the order they will be executed.
+
+ex: n = 5, x = 2
+[1,2,3,4,5] => [1,3,4,5] => [1,3,5] => [3,5] => [3] => []
+2,4,1,5,3
+
+-1 + 2 = index 1 (2)
+1 + 2 - 1 % arr.length= index 2 (4)
+2 + 2 - 1 % arr.length (3) = index 0 (1)
+0 + 2 - 1 % 2 = index 1 (5)
+last item = (3)
+
+ex: n = 5, x = 3
+[1,2,3,4,5] => [1,2,4,5] => [2,4,5] => [2,4] => [4] => []
+3,1,5,2,4
+
+-1 + 3 = index 2 (3)
+2 + 3 - 1 % arr.length (4) = index 0 (1)
+0 + 3 - 1 % arr.length (3) = index 2 (5)
+2 + 3 - 1 % 2 = index 0 (2)
+last item = (4)
+
+
+*/
+
+const n = 5;
+const x = 3;
+
+const prisonersCircle = (n, x) => {
+  let prisoners = [];
+  let order = [];
+  for (let i = 1; i <= n; i++){
+    prisoners.push(i);
+  }
+
+  let idx = 0;
+
+  while (prisoners.length > 1){
+    idx += x - 1;
+    let next = idx % prisoners.length;
+
+    let died = prisoners.splice(next, 1);
+    order.push(...died);
+    idx = next;
+  }
+
+  let finalOrder = order.concat(prisoners);
+  return finalOrder;
+};
+
+console.log('answer to prisoners: ', prisonersCircle(n, x));
+
+
+/* Number of candies - HackerRank */
+
+/* Question
+Alice is a kindergarten teacher. She wants to give some candies to the children in her class.  All the children sit in a line and each of them has a rating score according to his or her performance in the class.  Alice wants to give at least 1 candy to each child. If two children sit next to each other, then the one with the higher rating must get more candies. Alice wants to minimize the total number of candies she must buy.
+
+For example, assume her students' ratings are [4, 6, 4, 5, 6, 2]. She gives the students candy in the following minimal amounts: [1, 2, 1, 2, 3, 1]. She must buy a minimum of 10 candies.
+
+*/
+
+/* Example
+const ratings = [2, 4, 2, 6, 1, 7, 8, 9, 2, 1];
+first pass = [1,2,1,2,1,2,3,4,1,1]
+second pass = [1,2,1,2,1,2,3,4,2,1]
+
+*/
+
+const ratings = [2, 4, 2, 6, 1, 7, 8, 9, 2, 1];
+
+const candies = (ratings) => {
+  let numOfCandies = [1];
+
+  for (let i = 1; i < ratings.length; i++) {
+    if (ratings[i] > ratings[i - 1]) {
+      numOfCandies[i] = numOfCandies[i - 1] + 1;
+    } else {
+      numOfCandies[i] = 1;
+    }
+  }
+
+  for (let i = ratings.length - 1; i > 0; i--) {
+    if (ratings[i - 1] > ratings[i]) {
+      numOfCandies[i - 1] = Math.max(numOfCandies[i] + 1, numOfCandies[i - 1]);
+    }
+  }
+
+  return numOfCandies.reduce((start, next) => {
+    return start += next;
+  }, 0);
+
+};
+
+console.log('Answer to candies', candies(ratings));
