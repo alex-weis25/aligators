@@ -286,7 +286,6 @@ const promiseBracelets = customers => {
   }
 
   prices.forEach((val, i) => {
-    let profit;
     if(customers[i] >= val){
       total += val
     }
