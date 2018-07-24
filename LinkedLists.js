@@ -79,23 +79,22 @@ const mergeKSortedLinkedLists = (lists) => {
   let sortedList;
   let nextList;
 
-  if(!sortedList){
-    sortedList = lists.pop()
+  if (!sortedList) {
+    sortedList = lists.pop();
   }
 
-  if(!nextList){
-    nextList = lists.pop()
+  if (!nextList) {
+    nextList = lists.pop();
   }
 
 
 
-}
+};
 
 const mergeSort = (nodeA, nodeB) => {
 
-  while()
 
-}
+};
 
 /* Reverse a (singly or doubly) linked list */
 
