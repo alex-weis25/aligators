@@ -286,11 +286,129 @@ const promiseBracelets = customers => {
   }
 
   prices.forEach((val, i) => {
-    if(customers[i] >= val){
-      total += val
+    if (customers[i] >= val){
+      total += val;
     }
-  })
-  return [total, prices]
+  });
+  return [total, prices];
 };
 
 console.log('promiseBraclets answer: ', promiseBracelets(customers));
+
+/* Subarray sort */
+
+/* Question
+Write a function that takes in an array of integers of length atleast 2
+and return the small subarray that needs to be sorted in place in order
+for the entire array to be sorted. If the input array is already sorted,
+return [-1,-1]
+*/
+
+/* Apprach
+
+*/
+
+const array = [1, 2, 2, 3, 13, 4, 5, 6, 7, 13, 9, 12, 13, 14];
+
+const isOutOfOrder = (i, num, array) => {
+  if (i === 0) return num > array[i + 1];
+  if (i === array.length - 1) return num < array[i - 1];
+  return num > array[i + 1] || num < array[i - 1];
+};
+
+const subArrSort = arr => {
+  let minOutOfOrder = Infinity;
+  let maxOutOfOrder = -Infinity;
+  for (let i = 0; i < array.length; i++){
+    let current = array[i];
+    if (isOutOfOrder(i, current, array)){
+      minOutOfOrder = Math.min(minOutOfOrder, current);
+      maxOutOfOrder = Math.max(maxOutOfOrder, current);
+    }
+  }
+
+  if (minOutOfOrder === Infinity){
+    return [-1, -1];
+  }
+
+  let leftIdx = 0;
+  while (minOutOfOrder >= array[leftIdx]){
+    leftIdx++;
+  }
+
+  let rightIdx = array.length - 1;
+  while (maxOutOfOrder <= array[rightIdx]){
+    rightIdx--;
+  }
+  return [leftIdx, rightIdx];
+};
+
+console.log('subArraySort answer: ', subArrSort(array));
+
+/* Spiral Matrix */
+
+/* Question
+Given an 2X2 matrix, return an array that includes all the values in a clockwise
+pattern around the perimeter of the inputMatrix
+ */
+
+const inputMatrix  = [
+  [1,    2,   3,  4,    5],
+  [6,    7,   8,  9,   10],
+  [10,  11,  12, 13,   14],
+  [11,  12,  13,  14,  15],
+  [16,  17,  18,  19,  20]
+];
+
+const matrixSpiral = matrix => {
+  let finalMatrix = [];
+  let row = 0;
+  let col = 0;
+  let height = matrix.length;
+  let width = matrix[0].length;
+
+  while (row < height && col < width){
+   for (let i = row; i < width; i++){
+     finalMatrix.push(matrix[row][i]);
+   }
+   row++;
+
+   for (let j = row; j < height; j++){
+     finalMatrix.push(matrix[j][width - 1]);
+   }
+   width--;
+  if (row < height){
+    for (let k = width - 1; k >= col; k--){
+      finalMatrix.push(matrix[height - 1][k]);
+    }
+    height--;
+  }
+
+  if (col < width){
+    for (let m = height - 1; m >= row; m--){
+     finalMatrix.push(matrix[m][col]);
+   }
+   col++;
+  }
+
+  }
+  return finalMatrix;
+};
+
+console.log('matrixSpiral answer: ', matrixSpiral(inputMatrix));
+
+
+/* Find largest square in matric */
+
+/* Question
+given a matrix of 0s and 1s, find the area of the largest square containing all
+1s
+*/
+
+const squares = [
+
+];
+
+const largestSquare = squares => {
+
+};

@@ -5,15 +5,6 @@ Given the head of a linkedList and a key, remove the node with a value equal to
 the key
 */
 
-/* Approach
-if head is null return null.
-
-Need to keep track of previous node and current node. If current node.value === key
-prev.next = current.next
-if
-
-*/
-
 let head = {
   val: 10,
   next: {
@@ -59,42 +50,35 @@ const removeNode = (head, key) => {
 
 console.log('removeNode answer: ', removeNode(head, 3));
 
-/* merge K sorted linkedLists */
+/* remove Nth node from end of linkedList */
 
-/* Question
-Given an array of sorted linkedLists, merge the lists into one sorted list
-1. pop of array values 2 at a time until list.length === 0; 1 subsequently given return value from mergeSort will be a sorted comibined list.
+const removeNthNodeFromEnd = (head, n) => {
+  let length = 0;
+  let base = {val: 0, next: head};
+  base.next = head;
+  let current = head;
 
-2.
-
-
-*/
-
-/* Approach
-1.
-
-*/
-
-const mergeKSortedLinkedLists = (lists) => {
-  let sortedList;
-  let nextList;
-
-  if (!sortedList) {
-    sortedList = lists.pop();
+  while (current !== null){
+      current = current.next;
+      length++;
   }
 
-  if (!nextList) {
-    nextList = lists.pop();
+  let countDown = length - n;
+  let prev = base;
+  current = head;
+
+  while (countDown > 0){
+      current = current.next;
+      prev = prev.next;
+      countDown--;
   }
 
+  prev.next = current.next;
 
-
+  return base.next;
 };
 
-const mergeSort = (nodeA, nodeB) => {
-
-
-};
+console.log('removeNthNodeFromEnd answer: ', 'works on leetCode');
 
 /* Reverse a (singly or doubly) linked list */
 
@@ -125,9 +109,103 @@ const reverseLinkedList = head => {
 
 console.log('reverseLinkedList answer: ', reverseLinkedList(head));
 
+/* Swap Pairs in LinkedList */
+
+const swapPairs = head => {
+  let base = {val: 0, next: head};
+  let first = base;
+  let second = head;
+
+  while (second !== null && second.next !== null){
+    let next = second.next;
+    let nextNext = next.next;
+
+    first.next = next;
+    next.next = second;
+    second.next = nextNext;
+
+    first = second;
+    second = nextNext;
+  }
+  return base.next;
+};
+
+console.log('swapPairs answer: ', 'No test cases, works on leetCode');
+
+/* Reverse nodes in k-groups */
+
+
+
+
+
+
+
+
+/* merge K sorted linkedLists */
+
+/* Question
+Given an array of sorted linkedLists, merge the lists into one sorted list
+*/
+
+const lists = [
+  [{val: 1, next: {val: 3, next: {val: 5, next: null}}}],
+  [{val: 2, next: {val: 6, next: {val: 8, next: null}}}],
+  [{val: 4, next: {val: 5, next: null}}],
+  [{val: 0, next: {val: 7, next: {val: 9, next: null}}}]
+];
+
+const mergeSort = (nodeAList, nodeBList) => {
+  let headNode = {
+    val: 0,
+    next: null
+  };
+  let headStart = headNode;
+  if (!nodeAList) return nodeBList;
+  if (!nodeBList) return nodeAList;
+  let nodeA = nodeAList[0];
+  let nodeB = nodeBList[0];
+
+  while (nodeA !== null && nodeB !== null){
+    if (nodeA.val > nodeB.val){
+      headStart.next = nodeB;
+      headStart = headStart.next;
+      nodeB = nodeB.next;
+    } else {
+      headStart.next = nodeA;
+      headStart = headStart.next;
+      nodeA = nodeA.next;
+    }
+  }
+
+  while (nodeA !== null){
+    headStart.next = nodeA;
+    headStart = headStart.next;
+    nodeA = nodeA.next;
+  }
+
+  while (nodeB !== null){
+    headStart.next = nodeB;
+    headStart = headStart.next;
+    nodeB = nodeB.next;
+  }
+  return [headNode.next];
+
+};
+
+const mergeKSortedLinkedLists = (lists) => {
+  if (lists.length === 0) return [];
+  if (lists.length === 1) return lists[0];
+
+  let mid = Math.floor(lists.length / 2);
+  let left = lists.slice(0, mid);
+  let right = lists.slice(mid);
+  return mergeSort(mergeKSortedLinkedLists(left), mergeSort(mergeKSortedLinkedLists(right)));
+
+};
+
+console.log('mergeKSortedLinkedLists answer: ', mergeKSortedLinkedLists(lists));
 
 /* Find intersection of two linkedLists */
-
 
 const findMergeNode = (headA, headB) => {
   if (headA === null || headB === null) return null;
@@ -169,3 +247,5 @@ const findMergeNode = (headA, headB) => {
     return null;
   }
 };
+
+console.log('Find intersection of two LinkedLists');
