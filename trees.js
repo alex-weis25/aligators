@@ -106,3 +106,112 @@ var isSymmetric = function (root) {
 
 /* https://leetcode.com/problems/symmetric-tree/description/ */
 console.log('Symmetric tree answer: LeetCode Complete');
+
+/* Subtree */
+
+/* Question
+Given two trees, check to see if t is an exact subtree of s
+*/
+
+
+const compareTrees = (s, t) => {
+  if (s === null || t === null) {
+    if (s !== t) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  if (s.val !== t.val) return false;
+  let left = compareTrees(s.left, t.left);
+  if (!left) return false;
+  let right = compareTrees(s.right, t.right);
+  if (!right) return false;
+
+  return true;
+};
+
+const isSubtree = (s, t) => {
+  if (s === null || t === null) {
+    if (s !== t) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  if (s.val === t.val) {
+    let found = compareTrees(s, t);
+    if (found) {
+      return true;
+    }
+  }
+  let left = isSubtree(s.left, t);
+  if (left) return true;
+  let right = isSubtree(s.right, t);
+  if (right) return true;
+  return false;
+};
+
+/* https://leetcode.com/problems/subtree-of-another-tree/ */
+console.log('subTree answer: LeetCode Complete');
+
+/* Balanced Binary Tree */
+
+/* Approach
+1. for each node, pass the left and right child into helper function
+2. check return value from helper function for difference <= 1
+3. Helper function: check non-null children using DFS and add one to height
+4. if current height is > maxHeight, return current height
+
+*/
+
+const checkHeight = (node, curHeight, maxHeight = 1) => {
+  let newHeight = curHeight + 1;
+  let left;
+  let right;
+
+  if (node === null) return curHeight;
+  if (node.left !== null) {
+    left = checkHeight(node.left, newHeight, maxHeight);
+  }
+  if (node.right !== null) {
+    right = checkHeight(node.right, newHeight, maxHeight);
+  }
+
+  let maxSubtree = 0;
+  if (!isNaN(left) && !isNaN(right)) {
+    maxSubtree = Math.max(left, right);
+  } else if (!isNaN(left)) {
+    maxSubtree = left;
+  } else if (!isNaN(right)) {
+    maxSubtree = right;
+  }
+
+  if (maxSubtree > maxHeight) {
+    return maxSubtree;
+  } else {
+    return newHeight;
+  }
+};
+
+const isBalanced = (root) => {
+  let current = root;
+  let balanced = true;
+  if (current !== null) {
+    let leftSubtree = checkHeight(current.left, 0);
+    let rightSubtree = checkHeight(current.right, 0);
+    if (Math.abs(leftSubtree - rightSubtree) > 1) {
+      return false;
+    }
+    balanced = isBalanced(current.left);
+    if (!balanced) return false;
+    balanced = isBalanced(current.right);
+    if (!balanced) return false;
+  }
+
+  return balanced;
+};
+
+console.log('balancedBinary trees: LeetCode Complete');

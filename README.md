@@ -11,6 +11,8 @@ LinkedList Problems
 7. Find Intersection of two LinkedLists
 
 Binary Trees
-1. Check to see if two trees are identical
+1. Identical Trees
 2. InOrderTraversal
 3. Symmetric Tree
+4. Subtree of Another Tree
+5. BalancedBinaryTree
