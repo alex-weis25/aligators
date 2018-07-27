@@ -1,5 +1,14 @@
 # aligators
 
+#Basics
+1. Binary search
+2. DFS (pre, in, post)
+3. BFS
+4. Anagram check
+5. Palindrome (Longest palindrome substring)
+6. Permutation
+7. Powerset
+
 LinkedList Problems
 1. RemoveNode by value
 2. RemoveNthNode from end of LinkedList
@@ -24,3 +33,9 @@ Data Structures
 Graphs
 1. AllPaths
 2. ShortestPath visting all nodes (incomplete)
+
+Famous Algorithms
+1. Levenshtein distance
+2. Kadanes'
+3. Dijkstra's
+4.
