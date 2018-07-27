@@ -1,5 +1,4 @@
 # aligators
-Because it sounds more fun than algorithms
 
 LinkedList Problems
 1. RemoveNode by value
