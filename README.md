@@ -16,3 +16,12 @@ Binary Trees
 3. Symmetric Tree
 4. Subtree of Another Tree
 5. BalancedBinaryTree
+
+
+Data Structures
+1. Trie look up
+2. Binary Min Heap (TBD)
+
+Graphs
+1. AllPaths
+2. ShortestPath visting all nodes (incomplete)
