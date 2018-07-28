@@ -22,7 +22,6 @@ let head = {
   }
 };
 
-
 const removeNode = (head, key) => {
   if (head === null) return null;
   if (head.val === key) {
@@ -109,6 +108,36 @@ const reverseLinkedList = head => {
 
 console.log('reverseLinkedList answer: ', reverseLinkedList(head));
 
+/* Detect a cycle */
+
+const detectCycle = node => {
+  if (node === null) return null;
+  if (node.next === null) return null;
+  if (node.next.next === null) return null;
+  let slow = node.next;
+  let fast = node.next.next;
+
+  while (slow !== fast && fast.next !== null){
+    if (fast.next.next === null) return null;
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  if (slow === fast){
+    fast = node;
+    while (slow !== fast){
+      slow = slow.next;
+      fast = fast.next;
+    }
+    if (slow === fast){
+      return slow;
+    }
+  } else {
+    return null;
+  }
+};
+
+
 /* Swap Pairs in LinkedList */
 
 const swapPairs = head => {
@@ -133,12 +162,6 @@ const swapPairs = head => {
 console.log('swapPairs answer: ', 'No test cases, works on leetCode');
 
 /* Reverse nodes in k-groups */
-
-
-
-
-
-
 
 
 /* merge K sorted linkedLists */

@@ -1,22 +1,23 @@
-# aligators
+#aligators
 
-#Basics
+Basics
 1. Binary search
 2. DFS (pre, in, post)
 3. BFS
-4. Anagram check
+4. Anagram groups
 5. Palindrome (Longest palindrome substring)
-6. Permutation
-7. Powerset
+6. Permutations
+7. Powersets
 
 LinkedList Problems
 1. RemoveNode by value
 2. RemoveNthNode from end of LinkedList
 3. Reverse a LinkedList
-4. SwapPairs in LinkedList
-5. Reverse nodes in K-groups
-6. MergeKSorted LinkedLists
-7. Find Intersection of two LinkedLists
+4. Detect a cycle, find node
+5. SwapPairs in LinkedList
+6. Reverse nodes in K-groups
+7. MergeKSorted LinkedLists
+8. Find Intersection of two LinkedLists
 
 Binary Trees
 1. Identical Trees
@@ -36,6 +37,6 @@ Graphs
 
 Famous Algorithms
 1. Levenshtein distance
-2. Kadanes'
+2. Kadanes' algorithm
 3. Dijkstra's
 4.
