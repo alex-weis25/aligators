@@ -9,6 +9,15 @@ Basics
 6. Permutations
 7. Powersets
 
+Backtracking
+1. Sudoku Solver
+2. nQueens
+
+Sorting
+1. Merge Sort
+2. Quick Sort
+3. Bubble Sort
+4. Insertion Sort
 
 LinkedLists
 1. RemoveNode by value
@@ -32,6 +41,7 @@ Binary Trees
 Data Structures
 1. Trie look up
 2. Binary Min Heap
+3. Queue (Balanced Brackets)
 
 Graphs
 1. AllPaths
