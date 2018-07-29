@@ -299,7 +299,7 @@ console.log('promiseBraclets answer: ', promiseBracelets(customers));
 
 /* Question
 Write a function that takes in an array of integers of length atleast 2
-and return the small subarray that needs to be sorted in place in order
+and return the smallest subarray that needs to be sorted in place in order
 for the entire array to be sorted. If the input array is already sorted,
 return [-1,-1]
 */
@@ -401,14 +401,84 @@ console.log('matrixSpiral answer: ', matrixSpiral(inputMatrix));
 /* Find largest square in matric */
 
 /* Question
-given a matrix of 0s and 1s, find the area of the largest square containing all
-1s
+given a matrix of 0s and 1s, find the area of the largest square containing all 1s
 */
 
 const squares = [
-
+  [1,1,0,0,0,0],
+  [1,1,0,1,1,1],
+  [0,1,1,1,1,1],
+  [1,0,1,1,1,1],
+  [0,1,1,1,1,0]
 ];
 
 const largestSquare = squares => {
+  let found = [];
+  for(let i = 0; i < squares.length; i++){
+    let row = new Array(squares[i].length).fill(0);
+    found.push(row);
+  }
+  let largest = 0;
 
+  for(let row = 0; row < squares.length; row++){
+    for(let col = 0; col < squares[row].length; col++){
+      let cell = squares[row][col];
+      if(cell === 1){
+        if(row === 0 || col === 0){
+          found[row][col] = 1;
+        } else {
+          found[row][col] = 1 + Math.min(found[row - 1][col], found[row-1][col-1], found[row][col-1]);
+          if(found[row][col] > largest) largest = found[row][col];
+        }
+      } else {
+        found[row][col] = 0;
+      }
+    }
+  }
+  console.log('found: ', found);
+  return Math.pow(largest, 2);
 };
+
+console.log('largestSquare answer: ', largestSquare(squares));
+
+/* Max increasing sum */
+
+const nums = [40, 70, 20, 30, 15, 90, 50, 30];
+
+const maxIncreasingSum = nums => {
+  let maxSums = nums.slice();
+  let refs = new Array(nums.length).fill(null);
+  let maxVal = 0;
+  let maxIdx = undefined;
+  for(let i = 0; i < nums.length; i++){
+    for(let k = 0; k < i; k++){
+      let cur = nums[i];
+      let prev = nums[k];
+      if(prev < cur){
+        if(maxSums[k] + cur > maxSums[i]){
+          maxSums[i] = maxSums[k] + cur;
+          refs[i] = k;
+          if(maxVal < maxSums[i]){
+            maxVal = maxSums[i];
+            maxIdx = i;
+          }
+        }
+      }
+    }
+  }
+  return [maxVal, buildSequence(nums, refs, maxIdx)];
+};
+
+const buildSequence = (nums, refs, maxIdx) => {
+  let sequence = [];
+  let next = nums[maxIdx];
+  while(maxIdx !== null){
+    sequence.unshift(next);
+    maxIdx = refs[maxIdx];
+    next = nums[maxIdx];
+  }
+  return sequence;
+};
+
+
+console.log('max Increasing Sum answer: ', maxIncreasingSum(nums));

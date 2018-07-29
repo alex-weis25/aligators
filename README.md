@@ -9,6 +9,7 @@ Basics
 6. Permutations
 7. Powersets
 
+
 LinkedLists
 1. RemoveNode by value
 2. RemoveNthNode from end of LinkedList
@@ -42,3 +43,15 @@ Famous Algorithms
 2. Kadanes' algorithm
 3. Dijkstra's
 4.
+
+Recursion and Dynamic Programming
+1. Word Break
+2. Rod Cutting
+3. TripleStep
+4. Fibonacci Numbers
+5. Prisoners of War
+6. Number of Canides (hackerrank)
+7. Promise Bracelets
+8. Subarray Sort
+9. Largest Square in Matrix
+10. Max Increasing Sum
