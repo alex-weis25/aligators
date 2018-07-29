@@ -39,3 +39,60 @@ console.log('allPaths answer: ', allPaths(paths));
 /* link to Repl
 https://repl.it/@alexweis25/ShortestPathAllNodes
 */
+
+/* Friend circles */
+
+/* Question
+Given an adjacency matrix representing friend connections, find the
+number of unique friend cirlces. Friend A can be connected to D through,
+B and C.
+
+*/
+
+const M = [
+  [1,1,0],
+  [1,1,0],
+  [0,0,1]
+];
+
+const makeAdjList = matrix => {
+  let adjList = {};
+
+  for(let row = 0; row < matrix.length; row++){
+      adjList[row] = [];
+      for(let col = 0; col < matrix[row].length; col++){
+          if(row !== col){
+              if(matrix[row][col] === 1){
+                  adjList[row].push(col);
+              }
+          }
+      }
+  }
+  return adjList;
+};
+
+const friendCircles = (M) => {
+  let adjList = makeAdjList(M);
+  let circles = 0;
+  let visited = new Set();
+
+  for(let i = 0; i < M.length; i++){
+      let friend = i.toString();
+      if(!visited.has(friend)){
+          let friends = adjList[friend];
+          visited.add(friend);
+          circles++;
+          while(friends.length){
+              let nextFriend = friends.pop();
+              if(nextFriend) nextFriend = nextFriend.toString();
+              if(!visited.has(nextFriend)){
+                  friends = friends.concat(adjList[nextFriend]);
+                  visited.add(nextFriend);
+              }
+          }
+      }
+  }
+  return circles;
+};
+
+console.log('friendCirlces answer: ', friendCircles(M));

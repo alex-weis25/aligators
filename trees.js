@@ -215,3 +215,57 @@ const isBalanced = (root) => {
 };
 
 console.log('balancedBinary trees: LeetCode Complete');
+
+/* Check if Binary tree is univalue */
+
+const nodez = {
+  val: 1,
+  left: {
+    val: 1,
+    left: null,
+    right: {
+      val: 1,
+      left: {
+        val: 1,
+        left: null,
+        right: null
+      },
+      right: null
+    }
+  },
+  right: {
+    val: 1,
+    left: {
+      val: 1,
+      left: null,
+      right: null
+    },
+    right: null,
+  }
+};
+
+const addChildren = (node, arr) => {
+  if(node.left !== null) arr.push(node.left);
+  if(node.right !== null) arr.push(node.right);
+  return arr;
+};
+
+const checkUnivalue = node => {
+  let children = [];
+  const val = node.val;
+  if(node !== null){
+    children = addChildren(node, children);
+  } else {
+    return false;
+  }
+
+  while(children.length){
+    let next = children.shift();
+    if(next.val !== val) return false;
+    children = addChildren(next, children);
+  }
+
+  return true;
+};
+
+console.log('univalue Tree answer: ', checkUnivalue(nodez));

@@ -163,6 +163,67 @@ console.log('swapPairs answer: ', 'No test cases, works on leetCode');
 
 /* Reverse nodes in k-groups */
 
+let kHead = {
+  val: 1,
+  next: {
+    val: 2,
+    next: {
+      val: 3,
+      next: {
+        val: 4,
+        next: {
+          val: 5,
+          next: {
+            val: 6,
+            next: {
+              val: 7,
+              next: {
+                val: 8,
+                next: null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+const reverseKGroup = (head, k) => {
+    let startNode = head;
+    let before = null;
+    let after = null;
+    let counter = k;
+
+    while(startNode !== null && counter > 0){
+        startNode = startNode.next;
+        counter--;
+    }
+
+    //If you hit null, dont reverse startNodes
+    if(counter !== 0){
+        return head;
+    }
+
+    counter = k;
+    startNode = head;
+
+    while(counter > 0){
+        after = startNode.next;
+        startNode.next = before;
+        before = startNode;
+        startNode = after;
+        counter--;
+    }
+
+    if(after !== null){
+        head.next = reverseKGroup(after, k);
+    }
+
+    return before;
+};
+
+console.log('reverseKGroup answer: k:3', reverseKGroup(kHead, 3));
 
 /* merge K sorted linkedLists */
 
@@ -272,3 +333,4 @@ const findMergeNode = (headA, headB) => {
 };
 
 console.log('Find intersection of two LinkedLists');
+

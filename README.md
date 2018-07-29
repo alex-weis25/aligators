@@ -9,7 +9,7 @@ Basics
 6. Permutations
 7. Powersets
 
-LinkedList Problems
+LinkedLists
 1. RemoveNode by value
 2. RemoveNthNode from end of LinkedList
 3. Reverse a LinkedList
@@ -25,15 +25,17 @@ Binary Trees
 3. Symmetric Tree
 4. Subtree of Another Tree
 5. BalancedBinaryTree
+6. Univalue tree
 
 
 Data Structures
 1. Trie look up
-2. Binary Min Heap (TBD)
+2. Binary Min Heap
 
 Graphs
 1. AllPaths
 2. ShortestPath visting all nodes (incomplete)
+3. Friend circles
 
 Famous Algorithms
 1. Levenshtein distance
