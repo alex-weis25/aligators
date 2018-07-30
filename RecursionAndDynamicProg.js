@@ -482,3 +482,33 @@ const buildSequence = (nums, refs, maxIdx) => {
 
 
 console.log('max Increasing Sum answer: ', maxIncreasingSum(nums));
+
+/* Ways to reach end of xy plane */
+
+/* Question
+Given two positive integers, x&y, calculate the total possible ways of getting
+from [0,0] to [0,x] if you can move up-right, right and down-right on the
+plane. You can not go outside the plane (x < 0)
+*/
+
+const maxWays = (width, length) => {
+  let ways = 0;
+  const memo = {};
+  for(let i = -1; i <= width+1; i++){
+    memo[i] = {};
+  }
+
+  const recurse = (width, length, x, y, memo) => {
+    if(memo[x.toString()][y.toString()]) return memo[x.toString()][y.toString()];
+    if(x > width) return 0;
+    if(y > length) return 0;
+    if(y < 0) return 0;
+    if(x === width && y === 0) return 1;
+    return memo[x.toString()][y.toString()] = recurse(width, length, x+1, y,memo) + recurse(width, length, x+1, y+1,memo) + recurse(width, length, x+1, y-1,memo);
+  };
+
+  ways = recurse(width, length, 0, 0, memo);
+  return ways;
+};
+
+console.log('maxWays answer: ', maxWays(3,3));

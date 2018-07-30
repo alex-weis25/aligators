@@ -7,46 +7,19 @@ node.val, node.left, node.right
 */
 
 const isSameTree = (p, q) => {
-  if (p === null && q === null) {
-    return true;
-  } else if (p === null || q === null) {
-    return false;
+  let balanced = true;
+  if(p === null && q === null){
+      return true;
+  } else if (p === null || q === null){
+      return false;
   }
 
-  let pArr = convertTree(p);
-  let qArr = convertTree(q);
-
-  if (pArr.length !== qArr.length) return false;
-
-  for (let i = 0; i < pArr.length; i++) {
-    if (pArr[i] !== qArr[i]) return false;
-  }
-  return true;
+  if(p.val !== q.val) return false;
+   if(p !== null && q !== null){
+       balanced = isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+   }
+   return balanced;
 };
-
-const convertTree = root => {
-  let arr = [];
-  let children = [];
-  let current = root;
-  arr.push(current.val);
-  if (current.left !== null || current.right !== null) {
-    children = [current.left, current.right];
-  }
-
-  while (children.length) {
-    let next = children.shift();
-    if (next === null) {
-      arr.push(next);
-    } else {
-      arr.push(next.val);
-      if (next.left !== null || next.right !== null) {
-        children.push(next.left, next.right);
-      }
-    }
-  }
-  return arr;
-};
-
 
 /* https://leetcode.com/problems/same-tree/description/ */
 
@@ -112,7 +85,6 @@ console.log('Symmetric tree answer: LeetCode Complete');
 /* Question
 Given two trees, check to see if t is an exact subtree of s
 */
-
 
 const compareTrees = (s, t) => {
   if (s === null || t === null) {
