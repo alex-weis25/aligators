@@ -47,34 +47,22 @@ console.log('inOrderTraversal answer: LeetCode complete');
 /* Symmetric Tree */
 
 var isSymmetric = function (root) {
-  if (root === null) return true;
-  let curLevel = [];
-  let nextLeft = [];
-  let nextRight = [];
-  let current = root;
-  if (current.left !== null || current.right !== null) {
-    curLevel = [current.left, current.right];
-  }
+  let sym = true;
+    if(root === null) return true;
 
-  while (curLevel.length) {
-    let left = curLevel.shift();
-    let right = curLevel.pop();
-    if (left === null || right === null) {
-      if (left !== right) return false;
-    } else {
-      if (left.val !== right.val) return false;
-      nextLeft.push(left.left, left.right);
-      nextRight.unshift(right.left, right.right);
-    }
+    const check = (n1, n2, s) => {
+        if(n1 === null && n2 === null) return true;
+        if(n1 === null || n2 === null) return false;
+        if(n1.val === n2.val){
+            s = check(n1.left, n2.right,s) && check(n1.right, n2.left, s);
+        } else {
+            return false;
+        }
+        return s;
+    };
 
-    if (curLevel.length === 0) {
-      curLevel = nextLeft.concat(nextRight);
-      nextLeft = [];
-      nextRight = [];
-    }
-  }
-
-  return true;
+    sym = check(root.left, root.right);
+    return sym;
 };
 
 /* https://leetcode.com/problems/symmetric-tree/description/ */
