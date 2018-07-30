@@ -74,44 +74,30 @@ console.log('Symmetric tree answer: LeetCode Complete');
 Given two trees, check to see if t is an exact subtree of s
 */
 
-const compareTrees = (s, t) => {
-  if (s === null || t === null) {
-    if (s !== t) {
-      return false;
-    } else {
-      return true;
-    }
+const isSubtree = (s, t) => {
+  if(s === null && t === null) return true;
+  if(s === null || t === null) return false;
+  let found = false;
+
+  if(s.val === t.val){
+      found = recurse(s,t);
+      if(found) return true;
   }
 
-  if (s.val !== t.val) return false;
-  let left = compareTrees(s.left, t.left);
-  if (!left) return false;
-  let right = compareTrees(s.right, t.right);
-  if (!right) return false;
-
-  return true;
+  return isSubtree(s.left, t) || isSubtree(s.right, t);
 };
 
-const isSubtree = (s, t) => {
-  if (s === null || t === null) {
-    if (s !== t) {
-      return false;
-    } else {
-      return true;
-    }
-  }
 
-  if (s.val === t.val) {
-    let found = compareTrees(s, t);
-    if (found) {
-      return true;
-    }
+const recurse = (n1, n2) => {
+  if(n1 === null && n2 === null) return true;
+  if(n1 === null || n2 === null) return false;
+  let same = true;
+  if(n1.val === n2.val){
+    same = recurse(n1.left, n2.left) && recurse(n1.right, n2.right);
+  } else {
+    return false;
   }
-  let left = isSubtree(s.left, t);
-  if (left) return true;
-  let right = isSubtree(s.right, t);
-  if (right) return true;
-  return false;
+  return same;
 };
 
 /* https://leetcode.com/problems/subtree-of-another-tree/ */
