@@ -113,51 +113,28 @@ console.log('subTree answer: LeetCode Complete');
 
 */
 
-const checkHeight = (node, curHeight, maxHeight = 1) => {
-  let newHeight = curHeight + 1;
-  let left;
-  let right;
-
-  if (node === null) return curHeight;
-  if (node.left !== null) {
-    left = checkHeight(node.left, newHeight, maxHeight);
-  }
-  if (node.right !== null) {
-    right = checkHeight(node.right, newHeight, maxHeight);
-  }
-
-  let maxSubtree = 0;
-  if (!isNaN(left) && !isNaN(right)) {
-    maxSubtree = Math.max(left, right);
-  } else if (!isNaN(left)) {
-    maxSubtree = left;
-  } else if (!isNaN(right)) {
-    maxSubtree = right;
-  }
-
-  if (maxSubtree > maxHeight) {
-    return maxSubtree;
-  } else {
-    return newHeight;
-  }
+const findDepth = (node, depth = 0) => {
+  if(node === null) return depth;
+  let newDepth = depth + 1;
+  let leftDepth = findDepth(node.left, newDepth);
+  let rightDepth = findDepth(node.right, newDepth);
+  let maxDepth = leftDepth > rightDepth ? leftDepth : rightDepth;
+  return maxDepth;
 };
 
-const isBalanced = (root) => {
-  let current = root;
-  let balanced = true;
-  if (current !== null) {
-    let leftSubtree = checkHeight(current.left, 0);
-    let rightSubtree = checkHeight(current.right, 0);
-    if (Math.abs(leftSubtree - rightSubtree) > 1) {
-      return false;
-    }
-    balanced = isBalanced(current.left);
-    if (!balanced) return false;
-    balanced = isBalanced(current.right);
-    if (!balanced) return false;
-  }
+const isBalanced = (node) => {
+  if(node === null) return true;
+  let sameLength = true;
+  let left = findDepth(node.left);
+  let right = findDepth(node.right);
+  if(!(Math.abs(left - right) < 2)) return false;
 
-  return balanced;
+  sameLength = isBalanced(node.left);
+  if(!sameLength) return false;
+  sameLength = isBalanced(node.right);
+  if(!sameLength) return false;
+
+  return sameLength;
 };
 
 console.log('balancedBinary trees: LeetCode Complete');
