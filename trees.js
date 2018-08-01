@@ -15,9 +15,7 @@ const isSameTree = (p, q) => {
   }
 
   if(p.val !== q.val) return false;
-   if(p !== null && q !== null){
-       balanced = isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
-   }
+    balanced = isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
    return balanced;
 };
 
