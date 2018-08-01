@@ -60,7 +60,7 @@ Recursion and Dynamic Programming
 3. TripleStep
 4. Fibonacci Numbers
 5. Prisoners of War
-6. Number of Canides (hackerrank)
+6. Number of Candies (hackerrank)
 7. Promise Bracelets
 8. Subarray Sort
 9. Largest Square in Matrix

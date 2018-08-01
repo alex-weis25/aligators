@@ -398,7 +398,7 @@ const matrixSpiral = matrix => {
 console.log('matrixSpiral answer: ', matrixSpiral(inputMatrix));
 
 
-/* Find largest square in matric */
+/* Find largest square in matrix */
 
 /* Question
 given a matrix of 0s and 1s, find the area of the largest square containing all 1s

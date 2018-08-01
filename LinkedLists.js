@@ -333,4 +333,3 @@ const findMergeNode = (headA, headB) => {
 };
 
 console.log('Find intersection of two LinkedLists');
-
