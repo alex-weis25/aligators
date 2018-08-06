@@ -286,7 +286,7 @@ const promiseBracelets = customers => {
   }
 
   prices.forEach((val, i) => {
-    if (customers[i] >= val){
+    if (customers[i] >= val) {
       total += val;
     }
   });
@@ -319,25 +319,25 @@ const isOutOfOrder = (i, num, array) => {
 const subArrSort = arr => {
   let minOutOfOrder = Infinity;
   let maxOutOfOrder = -Infinity;
-  for (let i = 0; i < array.length; i++){
+  for (let i = 0; i < array.length; i++) {
     let current = array[i];
-    if (isOutOfOrder(i, current, array)){
+    if (isOutOfOrder(i, current, array)) {
       minOutOfOrder = Math.min(minOutOfOrder, current);
       maxOutOfOrder = Math.max(maxOutOfOrder, current);
     }
   }
 
-  if (minOutOfOrder === Infinity){
+  if (minOutOfOrder === Infinity) {
     return [-1, -1];
   }
 
   let leftIdx = 0;
-  while (minOutOfOrder >= array[leftIdx]){
+  while (minOutOfOrder >= array[leftIdx]) {
     leftIdx++;
   }
 
   let rightIdx = array.length - 1;
-  while (maxOutOfOrder <= array[rightIdx]){
+  while (maxOutOfOrder <= array[rightIdx]) {
     rightIdx--;
   }
   return [leftIdx, rightIdx];
@@ -352,12 +352,12 @@ Given an 2X2 matrix, return an array that includes all the values in a clockwise
 pattern around the perimeter of the inputMatrix
  */
 
-const inputMatrix  = [
-  [1,    2,   3,  4,    5],
-  [6,    7,   8,  9,   10],
-  [10,  11,  12, 13,   14],
-  [11,  12,  13,  14,  15],
-  [16,  17,  18,  19,  20]
+const inputMatrix = [
+  [1, 2, 3, 4, 5],
+  [6, 7, 8, 9, 10],
+  [10, 11, 12, 13, 14],
+  [11, 12, 13, 14, 15],
+  [16, 17, 18, 19, 20]
 ];
 
 const matrixSpiral = matrix => {
@@ -367,29 +367,29 @@ const matrixSpiral = matrix => {
   let height = matrix.length;
   let width = matrix[0].length;
 
-  while (row < height && col < width){
-   for (let i = row; i < width; i++){
-     finalMatrix.push(matrix[row][i]);
-   }
-   row++;
-
-   for (let j = row; j < height; j++){
-     finalMatrix.push(matrix[j][width - 1]);
-   }
-   width--;
-  if (row < height){
-    for (let k = width - 1; k >= col; k--){
-      finalMatrix.push(matrix[height - 1][k]);
+  while (row < height && col < width) {
+    for (let i = row; i < width; i++) {
+      finalMatrix.push(matrix[row][i]);
     }
-    height--;
-  }
+    row++;
 
-  if (col < width){
-    for (let m = height - 1; m >= row; m--){
-     finalMatrix.push(matrix[m][col]);
-   }
-   col++;
-  }
+    for (let j = row; j < height; j++) {
+      finalMatrix.push(matrix[j][width - 1]);
+    }
+    width--;
+    if (row < height) {
+      for (let k = width - 1; k >= col; k--) {
+        finalMatrix.push(matrix[height - 1][k]);
+      }
+      height--;
+    }
+
+    if (col < width) {
+      for (let m = height - 1; m >= row; m--) {
+        finalMatrix.push(matrix[m][col]);
+      }
+      col++;
+    }
 
   }
   return finalMatrix;
@@ -405,30 +405,30 @@ given a matrix of 0s and 1s, find the area of the largest square containing all 
 */
 
 const squares = [
-  [1,1,0,0,0,0],
-  [1,1,0,1,1,1],
-  [0,1,1,1,1,1],
-  [1,0,1,1,1,1],
-  [0,1,1,1,1,0]
+  [1, 1, 0, 0, 0, 0],
+  [1, 1, 0, 1, 1, 1],
+  [0, 1, 1, 1, 1, 1],
+  [1, 0, 1, 1, 1, 1],
+  [0, 1, 1, 1, 1, 0]
 ];
 
 const largestSquare = squares => {
   let found = [];
-  for(let i = 0; i < squares.length; i++){
+  for (let i = 0; i < squares.length; i++) {
     let row = new Array(squares[i].length).fill(0);
     found.push(row);
   }
   let largest = 0;
 
-  for(let row = 0; row < squares.length; row++){
-    for(let col = 0; col < squares[row].length; col++){
+  for (let row = 0; row < squares.length; row++) {
+    for (let col = 0; col < squares[row].length; col++) {
       let cell = squares[row][col];
-      if(cell === 1){
-        if(row === 0 || col === 0){
+      if (cell === 1) {
+        if (row === 0 || col === 0) {
           found[row][col] = 1;
         } else {
-          found[row][col] = 1 + Math.min(found[row - 1][col], found[row-1][col-1], found[row][col-1]);
-          if(found[row][col] > largest) largest = found[row][col];
+          found[row][col] = 1 + Math.min(found[row - 1][col], found[row - 1][col - 1], found[row][col - 1]);
+          if (found[row][col] > largest) largest = found[row][col];
         }
       } else {
         found[row][col] = 0;
@@ -450,15 +450,15 @@ const maxIncreasingSum = nums => {
   let refs = new Array(nums.length).fill(null);
   let maxVal = 0;
   let maxIdx = undefined;
-  for(let i = 0; i < nums.length; i++){
-    for(let k = 0; k < i; k++){
+  for (let i = 0; i < nums.length; i++) {
+    for (let k = 0; k < i; k++) {
       let cur = nums[i];
       let prev = nums[k];
-      if(prev < cur){
-        if(maxSums[k] + cur > maxSums[i]){
+      if (prev < cur) {
+        if (maxSums[k] + cur > maxSums[i]) {
           maxSums[i] = maxSums[k] + cur;
           refs[i] = k;
-          if(maxVal < maxSums[i]){
+          if (maxVal < maxSums[i]) {
             maxVal = maxSums[i];
             maxIdx = i;
           }
@@ -472,7 +472,7 @@ const maxIncreasingSum = nums => {
 const buildSequence = (nums, refs, maxIdx) => {
   let sequence = [];
   let next = nums[maxIdx];
-  while(maxIdx !== null){
+  while (maxIdx !== null) {
     sequence.unshift(next);
     maxIdx = refs[maxIdx];
     next = nums[maxIdx];
@@ -494,21 +494,59 @@ plane. You can not go outside the plane (x < 0)
 const maxWays = (width, length) => {
   let ways = 0;
   const memo = {};
-  for(let i = -1; i <= width+1; i++){
+  for (let i = -1; i <= width + 1; i++) {
     memo[i] = {};
   }
 
   const recurse = (width, length, x, y, memo) => {
-    if(memo[x.toString()][y.toString()]) return memo[x.toString()][y.toString()];
-    if(x > width) return 0;
-    if(y > length) return 0;
-    if(y < 0) return 0;
-    if(x === width && y === 0) return 1;
-    return memo[x.toString()][y.toString()] = recurse(width, length, x+1, y,memo) + recurse(width, length, x+1, y+1,memo) + recurse(width, length, x+1, y-1,memo);
+    if (memo[x.toString()][y.toString()]) return memo[x.toString()][y.toString()];
+    if (x > width) return 0;
+    if (y > length) return 0;
+    if (y < 0) return 0;
+    if (x === width && y === 0) return 1;
+    return memo[x.toString()][y.toString()] = recurse(width, length, x + 1, y, memo) + recurse(width, length, x + 1, y + 1, memo) + recurse(width, length, x + 1, y - 1, memo);
   };
 
   ways = recurse(width, length, 0, 0, memo);
   return ways;
 };
 
-console.log('maxWays answer: ', maxWays(3,3));
+console.log('maxWays answer: ', maxWays(3, 3));
+
+/* Wiggle subsequence */
+
+/* Question
+A sequence of numbers is called a wiggle sequence if the differences between successive numbers
+strictly alternate between positive and negative. Given a sequence of integers,
+return the length of the longest subsequence that is a wiggle sequence. A subsequence
+is obtained by deleting some number of elements (eventually, also zero) from the original
+sequence, leaving the remaining elements in their original order.
+*/
+
+const wigNums = [2, 1, 7, 5, 9, 8, 8];
+
+const wiggleMaxLength = nums => {
+  if (!nums.length) return 0;
+  if (nums.length === 1) return 1;
+
+  let curSign = nums[1] > nums[0] ? 1 : -1;
+  if (nums[1] === nums[0]) curSign = 0;
+  let idx = 1;
+  let count = 1;
+  if (curSign) count++;
+
+  while (idx < nums.length - 1) {
+
+    let nextSign = nums[++idx] > nums[idx - 1] ? 1 : -1;
+    if (nums[idx] === nums[idx - 1]) nextSign = 0;
+
+    if (nextSign !== 0 && curSign !== nextSign) {
+      count++;
+      curSign = nextSign;
+    }
+  }
+
+  return count;
+};
+
+console.log('wiggleLength answer: ', wiggleMaxLength(wigNums));
