@@ -550,3 +550,4 @@ const wiggleMaxLength = nums => {
 };
 
 console.log('wiggleLength answer: ', wiggleMaxLength(wigNums));
+

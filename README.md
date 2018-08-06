@@ -42,6 +42,7 @@ Data Structures
 1. Trie look up
 2. Binary Min Heap
 3. Queue (Balanced Brackets)
+4. Asteriod Collision (stacks)
 
 Graphs
 1. AllPaths
@@ -66,3 +67,4 @@ Recursion and Dynamic Programming
 9. Largest Square in Matrix
 10. Max Increasing Sum
 11. Ways to reach end xy-plane
+12. Wiggle Subsequence
