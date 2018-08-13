@@ -1,7 +1,7 @@
 /* Sudoku Solver */
 
 /* Question
-Given a partially completed soduko board, write an algorithm that returns true
+Given a partially completed sudoku board, write an algorithm that returns true
 if there is a valid solution and false if there is not. Print the final board
 before returning true.
 */
